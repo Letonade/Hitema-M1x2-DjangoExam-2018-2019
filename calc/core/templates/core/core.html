@@ -9,3 +9,40 @@
 {% empty %}
     <p>Aucun article.</p>
 {% endfor %} -->
+
+<form action="{% url 'core' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <table>
+    	<tr>
+    		<td colspan="4">
+    			<input type="text" name="" disabled="disabled" value="{{i}}">
+			</td>
+    	</tr>
+    	<tr>
+			<td><input type="submit" value="1" name="operate" /></td>
+			<td><input type="submit" value="2" name="operate" /></td>
+			<td><input type="submit" value="3" name="operate" /></td>
+			<td><input type="submit" value="add" name="operate" /></td>
+    	</tr>
+    	<tr>
+			<td><input type="submit" value="4" name="operate" /></td>
+			<td><input type="submit" value="5" name="operate" /></td>
+			<td><input type="submit" value="6" name="operate" /></td>
+			<td><input type="submit" value="substract" name="operate" /></td>
+    	</tr>
+    	<tr>
+			<td><input type="submit" value="7" name="operate" /></td>
+			<td><input type="submit" value="8" name="operate" /></td>
+			<td><input type="submit" value="9" name="operate" /></td>
+			<td><input type="submit" value="multiply" name="operate" /></td>
+    	</tr>
+    	<tr>
+    		<td><input type="submit" value="CE" name="operate" /></td>
+    		<td><input type="submit" value="0" name="operate" /></td>
+    		<td><input type="submit" value="equal" name="operate" /></td>
+    		<td><input type="submit" value="divide" name="operate" /></td>
+    	</tr>
+
+    </table>
+</form>
