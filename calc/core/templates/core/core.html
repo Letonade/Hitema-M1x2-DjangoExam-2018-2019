@@ -46,3 +46,11 @@
 
     </table>
 </form>
+
+{% for equation in equations %}
+    <div class="equations">
+    	<p>{{equation}}</p>
+    </div>
+{% empty %}
+    <p>Aucune equation.</p>
+{% endfor %}

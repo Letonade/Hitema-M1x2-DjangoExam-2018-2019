@@ -129,6 +129,7 @@ def core(request):
 	if operation1 == "divide" : operation1 = "/"
 	if operation1 == "multiply" : operation1 = "x"
 	number2 = request.session.get('number2');
+	equations = equation.objects.all()
 	return render(request, 'core/core.html', locals())
     
 

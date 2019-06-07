@@ -9,6 +9,6 @@ class equation(models.Model):
 
     class Meta:
         ordering = ['date']
-        
+
     def __str__(self):
-        return self.chiffre1 + self.operation + self.chiffre2
+    	return self.chiffre1 + " " + self.operation + " " + self.chiffre2
