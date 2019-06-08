@@ -49,7 +49,7 @@
 
 {% for equation in equations %}
     <div class="equations">
-    	<p>{{equation}}</p>
+    	<p><a href="{% url 'load' id=equation.id %}">{{equation}}</a></p>
     </div>
 {% empty %}
     <p>Aucune equation.</p>

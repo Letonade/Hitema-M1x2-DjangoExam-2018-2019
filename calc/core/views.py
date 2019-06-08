@@ -11,6 +11,9 @@ def core(request):
 	#request.session['operation1'] = ""
 	#request.session['number2'] = ""
 	#request.session['operation2'] = ""
+	if request.POST.get('operate') ==  "0":
+		i="0"
+		setNum(request, "0") 
 	if request.POST.get('operate') ==  "1":
 		i="1"
 		setNum(request, "1")  
@@ -136,12 +139,14 @@ def core(request):
 def add(request, chiffre1 ,chiffre2):
 	
 	total = int(chiffre1) + int(chiffre2)
+	if total<0:
+		total=0
 	equation(chiffre1 = request.session.get('number1'), operation = request.session.get('operation1'), chiffre2 = request.session.get('number2')).save()
 	request.session['operation1'] = ""
 	if request.session.get('operation2') != "":
 		request.session['operation1'] = request.session.get('operation2') 
 	request.session['operation2'] = ""
-	request.session['number1'] = str(total)
+	request.session['number1'] = str(int(total))
 	request.session['number2'] = ""	
 	return redirect(core)
     
@@ -149,11 +154,14 @@ def add(request, chiffre1 ,chiffre2):
 def substract(request, chiffre1 ,chiffre2):
 	
 	total = int(chiffre1) - int(chiffre2)
+	if total<0:
+		total=0
+	equation(chiffre1 = request.session.get('number1'), operation = request.session.get('operation1'), chiffre2 = request.session.get('number2')).save()
 	request.session['operation1'] = ""
 	if request.session.get('operation2') != "":
 		request.session['operation1'] = request.session.get('operation2') 
 	request.session['operation2'] = ""
-	request.session['number1'] = str(total)
+	request.session['number1'] = str(int(total))
 	request.session['number2'] = ""	
 	return redirect(core)
     
@@ -161,11 +169,14 @@ def substract(request, chiffre1 ,chiffre2):
 def multiply(request, chiffre1 ,chiffre2):
 	
 	total = int(chiffre1) * int(chiffre2)
+	if total<0:
+		total=0
+	equation(chiffre1 = request.session.get('number1'), operation = request.session.get('operation1'), chiffre2 = request.session.get('number2')).save()
 	request.session['operation1'] = ""
 	if request.session.get('operation2') != "":
 		request.session['operation1'] = request.session.get('operation2') 
 	request.session['operation2'] = ""
-	request.session['number1'] = str(total)
+	request.session['number1'] = str(int(total))
 	request.session['number2'] = ""	
 	return redirect(core)
     
@@ -173,14 +184,24 @@ def multiply(request, chiffre1 ,chiffre2):
 def divide(request, chiffre1 ,chiffre2):
 	
 	total = int(chiffre1) / int(chiffre2)
+	if total<0:
+		total=0
+	equation(chiffre1 = request.session.get('number1'), operation = request.session.get('operation1'), chiffre2 = request.session.get('number2')).save()
 	request.session['operation1'] = ""
 	if request.session.get('operation2') != "":
 		request.session['operation1'] = request.session.get('operation2') 
 	request.session['operation2'] = ""
-	request.session['number1'] = str(total)
+	request.session['number1'] = str(int(total))
 	request.session['number2'] = ""	
 	return redirect(core)
-    
+
+
+def load(request, id):
+	eq =  get_object_or_404(equation, id=id)
+	request.session['operation1'] = eq.operation
+	request.session['number1'] = eq.chiffre1
+	request.session['number2'] = eq	.chiffre2
+	return redirect(core)
 
 
 

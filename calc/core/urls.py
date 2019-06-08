@@ -8,4 +8,7 @@ urlpatterns = [
     path('calcul/substract/<int:chiffre1>/<int:chiffre2>', views.substract, name = "substract"), 
     path('calcul/multiply/<int:chiffre1>/<int:chiffre2>', views.multiply, name = "multiply"), 
     path('calcul/divide/<int:chiffre1>/<int:chiffre2>', views.divide, name = "divide"), 
+    path('calcul/load/<int:id>', views.load, name = "load"), 
+ 
+
 ]
