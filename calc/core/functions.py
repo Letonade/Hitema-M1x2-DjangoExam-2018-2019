@@ -2,11 +2,11 @@ from datetime import datetime
 
 def point(request):
 	#print(request.session.get('number1'))
-	if request.session.get('number2') != "":
+	if request.session.get('number2',"") != "":
 		return 3
-	if request.session.get('operation1') != "":
+	if request.session.get('operation1',"") != "":
 		return 2
-	if request.session.get('number1') != "":
+	if request.session.get('number1',"") != "":
 		return 1
 	return 0
 
@@ -50,7 +50,7 @@ def setOp(request, val):
 	return 0
 
 def numberRedirect(request):
-	operation = request.session.get('operation1')
+	operation = request.session.get('operation1',"")
 	print('numberRedirect')
 	print(operation)
 	if operation == "add":
@@ -71,5 +71,6 @@ def CE(request):
 	request.session['operation1'] = ""
 	request.session['number2'] = ""
 	request.session['operation2'] = ""
+	request.session.clear()
 
 	

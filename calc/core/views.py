@@ -11,6 +11,8 @@ def core(request):
 	#request.session['operation1'] = ""
 	#request.session['number2'] = ""
 	#request.session['operation2'] = ""
+	if request.session.get('tutu') == "":
+		print("tutu")
 	if request.POST.get('operate') ==  "0":
 		i="0"
 		setNum(request, "0") 
@@ -59,13 +61,13 @@ def core(request):
 		if point(request) == 3:
 			Iredirect = numberRedirect(request)
 			if Iredirect == 0:
-				return redirect(add, request.session.get('number1'), request.session.get('number2'))
+				return redirect(add, request.session.get('number1',""), request.session.get('number2',""))
 			if Iredirect == 1:
-				return redirect(substract, request.session.get('number1'), request.session.get('number2'))
+				return redirect(substract, request.session.get('number1',""), request.session.get('number2',""))
 			if Iredirect == 2:
-				return redirect(multiply, request.session.get('number1'), request.session.get('number2'))
+				return redirect(multiply, request.session.get('number1',""), request.session.get('number2',""))
 			if Iredirect == 3:
-				return redirect(divide, request.session.get('number1'), request.session.get('number2'))
+				return redirect(divide, request.session.get('number1',""), request.session.get('number2',""))
 		#operation
 	if request.POST.get('operate') ==  "add":
 		i="add" 
@@ -73,13 +75,13 @@ def core(request):
 		if numberSet == 2:
 			Iredirect = numberRedirect(request)
 			if Iredirect == 0:
-				return redirect(add, request.session.get('number1'), request.session.get('number2'))
+				return redirect(add, request.session.get('number1'), request.session.get('number2',""))
 			if Iredirect == 1:
-				return redirect(substract, request.session.get('number1'), request.session.get('number2'))
+				return redirect(substract, request.session.get('number1'), request.session.get('number2',""))
 			if Iredirect == 2:
-				return redirect(multiply, request.session.get('number1'), request.session.get('number2'))
+				return redirect(multiply, request.session.get('number1'), request.session.get('number2',""))
 			if Iredirect == 3:
-				return redirect(divide, request.session.get('number1'), request.session.get('number2'))
+				return redirect(divide, request.session.get('number1'), request.session.get('number2',""))
 		#operation
 	if request.POST.get('operate') ==  "substract":
 		i="substract"
@@ -87,13 +89,13 @@ def core(request):
 		if numberSet == 2:
 			Iredirect = numberRedirect(request)
 			if Iredirect == 0:
-				return redirect(add, request.session.get('number1'), request.session.get('number2'))
+				return redirect(add, request.session.get('number1'), request.session.get('number2',""))
 			if Iredirect == 1:
-				return redirect(substract, request.session.get('number1'), request.session.get('number2'))
+				return redirect(substract, request.session.get('number1'), request.session.get('number2',""))
 			if Iredirect == 2:
-				return redirect(multiply, request.session.get('number1'), request.session.get('number2'))
+				return redirect(multiply, request.session.get('number1'), request.session.get('number2',""))
 			if Iredirect == 3:
-				return redirect(divide, request.session.get('number1'), request.session.get('number2')) 
+				return redirect(divide, request.session.get('number1'), request.session.get('number2',"")) 
 		#operation
 	if request.POST.get('operate') ==  "multiply":
 		i="multiply" 
@@ -101,13 +103,13 @@ def core(request):
 		if numberSet == 2:
 			Iredirect = numberRedirect(request)
 			if Iredirect == 0:
-				return redirect(add, request.session.get('number1'), request.session.get('number2'))
+				return redirect(add, request.session.get('number1'), request.session.get('number2',""))
 			if Iredirect == 1:
-				return redirect(substract, request.session.get('number1'), request.session.get('number2'))
+				return redirect(substract, request.session.get('number1'), request.session.get('number2',""))
 			if Iredirect == 2:
-				return redirect(multiply, request.session.get('number1'), request.session.get('number2'))
+				return redirect(multiply, request.session.get('number1'), request.session.get('number2',""))
 			if Iredirect == 3:
-				return redirect(divide, request.session.get('number1'), request.session.get('number2'))
+				return redirect(divide, request.session.get('number1'), request.session.get('number2',""))
 		#operation
 	if request.POST.get('operate') ==  "divide":
 		i="divide" 
@@ -115,23 +117,23 @@ def core(request):
 		if numberSet == 2:
 			Iredirect = numberRedirect(request)
 			if Iredirect == 0:
-				return redirect(add, request.session.get('number1'), request.session.get('number2'))
+				return redirect(add, request.session.get('number1'), request.session.get('number2',""))
 			if Iredirect == 1:
-				return redirect(substract, request.session.get('number1'), request.session.get('number2'))
+				return redirect(substract, request.session.get('number1'), request.session.get('number2',""))
 			if Iredirect == 2:
-				return redirect(multiply, request.session.get('number1'), request.session.get('number2'))
+				return redirect(multiply, request.session.get('number1'), request.session.get('number2',""))
 			if Iredirect == 3:
-				return redirect(divide, request.session.get('number1'), request.session.get('number2'))
+				return redirect(divide, request.session.get('number1'), request.session.get('number2',""))
 		#operation
 		point(request)
 
-	number1 = request.session.get('number1');
-	operation1 = request.session.get('operation1');
+	number1 = request.session.get('number1',"");
+	operation1 = request.session.get('operation1',"");
 	if operation1 == "add" : operation1 = "+"
 	if operation1 == "substract" : operation1 = "-"
 	if operation1 == "divide" : operation1 = "/"
 	if operation1 == "multiply" : operation1 = "x"
-	number2 = request.session.get('number2');
+	number2 = request.session.get('number2',"");
 	equations = equation.objects.all()
 	return render(request, 'core/core.html', locals())
     
@@ -141,10 +143,10 @@ def add(request, chiffre1 ,chiffre2):
 	total = int(chiffre1) + int(chiffre2)
 	if total<0:
 		total=0
-	equation(chiffre1 = request.session.get('number1'), operation = request.session.get('operation1'), chiffre2 = request.session.get('number2')).save()
+	equation(chiffre1 = request.session.get('number1',""), operation = request.session.get('operation1',""), chiffre2 = request.session.get('number2',"")).save()
 	request.session['operation1'] = ""
 	if request.session.get('operation2') != "":
-		request.session['operation1'] = request.session.get('operation2') 
+		request.session['operation1'] = request.session.get('operation2',"") 
 	request.session['operation2'] = ""
 	request.session['number1'] = str(int(total))
 	request.session['number2'] = ""	
@@ -156,10 +158,10 @@ def substract(request, chiffre1 ,chiffre2):
 	total = int(chiffre1) - int(chiffre2)
 	if total<0:
 		total=0
-	equation(chiffre1 = request.session.get('number1'), operation = request.session.get('operation1'), chiffre2 = request.session.get('number2')).save()
+	equation(chiffre1 = request.session.get('number1',""), operation = request.session.get('operation1',""), chiffre2 = request.session.get('number2',"")).save()
 	request.session['operation1'] = ""
 	if request.session.get('operation2') != "":
-		request.session['operation1'] = request.session.get('operation2') 
+		request.session['operation1'] = request.session.get('operation2',"") 
 	request.session['operation2'] = ""
 	request.session['number1'] = str(int(total))
 	request.session['number2'] = ""	
@@ -171,10 +173,10 @@ def multiply(request, chiffre1 ,chiffre2):
 	total = int(chiffre1) * int(chiffre2)
 	if total<0:
 		total=0
-	equation(chiffre1 = request.session.get('number1'), operation = request.session.get('operation1'), chiffre2 = request.session.get('number2')).save()
+	equation(chiffre1 = request.session.get('number1',""), operation = request.session.get('operation1',""), chiffre2 = request.session.get('number2',"")).save()
 	request.session['operation1'] = ""
 	if request.session.get('operation2') != "":
-		request.session['operation1'] = request.session.get('operation2') 
+		request.session['operation1'] = request.session.get('operation2',"") 
 	request.session['operation2'] = ""
 	request.session['number1'] = str(int(total))
 	request.session['number2'] = ""	
@@ -186,10 +188,10 @@ def divide(request, chiffre1 ,chiffre2):
 	total = int(chiffre1) / int(chiffre2)
 	if total<0:
 		total=0
-	equation(chiffre1 = request.session.get('number1'), operation = request.session.get('operation1'), chiffre2 = request.session.get('number2')).save()
+	equation(chiffre1 = request.session.get('number1',""), operation = request.session.get('operation1',""), chiffre2 = request.session.get('number2',"")).save()
 	request.session['operation1'] = ""
 	if request.session.get('operation2') != "":
-		request.session['operation1'] = request.session.get('operation2') 
+		request.session['operation1'] = request.session.get('operation2',"") 
 	request.session['operation2'] = ""
 	request.session['number1'] = str(int(total))
 	request.session['number2'] = ""	
